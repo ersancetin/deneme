@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="bg-gray-100">
+    <ActionBar title="Add New Item" class="bg-purple-600 text-white">
+        <NavigationButton text="Back" android.systemIcon="ic_menu_back" />
+    </ActionBar>
+
+    <ScrollView>
+        <StackLayout class="p-4">
+            <GridLayout rows="200, auto" columns="*, *" class="mb-4">
+                <Image row="0" colSpan="2" src="{{ previewImage }}" class="rounded-lg" stretch="aspectFill" />
+                <Button row="1" col="0" text="Take Photo" tap="{{ onTakePhoto }}" class="-outline m-1" />
+                <Button row="1" col="1" text="Choose Photo" tap="{{ onChoosePhoto }}" class="-outline m-1" />
+            </GridLayout>
+
+            <StackLayout class="form">
+                <Label text="Type" class="font-bold mb-2" />
+                <SegmentedBar items="{{ types }}" selectedIndex="{{ selectedTypeIndex }}" class="mb-4" />
+
+                <Label text="Color" class="font-bold mb-2" />
+                <TextField text="{{ color }}" hint="Enter color" class="input mb-4" />
+
+                <Label text="Season" class="font-bold mb-2" />
+                <SegmentedBar items="{{ seasons }}" selectedIndex="{{ selectedSeasonIndex }}" class="mb-4" />
+
+                <Label text="Occasion" class="font-bold mb-2" />
+                <SegmentedBar items="{{ occasions }}" selectedIndex="{{ selectedOccasionIndex }}" class="mb-4" />
+
+                <Button text="Save Item" tap="{{ onSaveItem }}" class="-primary" isEnabled="{{ canSave }}" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</Page>

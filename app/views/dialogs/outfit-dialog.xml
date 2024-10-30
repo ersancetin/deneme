@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" class="bg-gray-100">
+    <StackLayout class="p-4">
+        <Label text="Generate Outfit" class="text-xl font-bold mb-4" />
+
+        <Label text="Occasion" class="font-semibold mb-2" />
+        <SegmentedBar items="{{ occasions }}" selectedIndex="{{ selectedOccasionIndex }}" class="mb-4" />
+
+        <Label text="Weather" class="font-semibold mb-2" />
+        <SegmentedBar items="{{ weather }}" selectedIndex="{{ selectedWeatherIndex }}" class="mb-4" />
+
+        <Label text="Style Preference" class="font-semibold mb-2" />
+        <SegmentedBar items="{{ styles }}" selectedIndex="{{ selectedStyleIndex }}" class="mb-4" />
+
+        <GridLayout columns="*, *" class="mt-4">
+            <Button col="0" text="Generate" tap="{{ onGenerate }}" class="-primary m-1" />
+            <Button col="1" text="Cancel" tap="{{ onCancel }}" class="-outline m-1" />
+        </GridLayout>
+    </StackLayout>
+</Page>

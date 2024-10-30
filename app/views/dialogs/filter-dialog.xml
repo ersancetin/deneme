@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" class="bg-gray-100">
+    <StackLayout class="p-4">
+        <Label text="Filter Items" class="text-xl font-bold mb-4" />
+
+        <Label text="Type" class="font-semibold mb-2" />
+        <SegmentedBar items="{{ types }}" selectedIndex="{{ selectedTypeIndex }}" class="mb-4" />
+
+        <Label text="Season" class="font-semibold mb-2" />
+        <SegmentedBar items="{{ seasons }}" selectedIndex="{{ selectedSeasonIndex }}" class="mb-4" />
+
+        <Label text="Occasion" class="font-semibold mb-2" />
+        <SegmentedBar items="{{ occasions }}" selectedIndex="{{ selectedOccasionIndex }}" class="mb-4" />
+
+        <GridLayout columns="*, *" class="mt-4">
+            <Button col="0" text="Apply" tap="{{ onApply }}" class="-primary m-1" />
+            <Button col="1" text="Cancel" tap="{{ onCancel }}" class="-outline m-1" />
+        </GridLayout>
+    </StackLayout>
+</Page>

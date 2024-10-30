@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="bg-gray-100">
+    <ActionBar title="AI Wardrobe" class="bg-purple-600 text-white">
+        <ActionItem ios.position="right" android.position="actionBar" tap="{{ onAddItem }}">
+            <Label text="+" class="text-2xl text-white p-2" />
+        </ActionItem>
+    </ActionBar>
+
+    <TabView selectedTabTextColor="#6D28D9" androidTabsPosition="bottom">
+        <TabViewItem title="Wardrobe">
+            <GridLayout rows="auto, auto, *">
+                <GridLayout row="0" columns="*, auto" class="p-4">
+                    <SearchBar col="0" hint="Search items..." text="{{ searchQuery }}" submit="{{ onSearch }}" 
+                              textChange="{{ onSearchTextChanged }}" class="bg-white" />
+                    <Button col="1" text="Filter" tap="{{ showFilterDialog }}" class="-outline ml-2" />
+                </GridLayout>
+                
+                <WrapLayout row="1" class="px-2">
+                    <Label text="{{ activeFilters }}" class="text-sm text-purple-600 m-1" visibility="{{ activeFilters ? 'visible' : 'collapsed' }}" />
+                    <Button text="Clear Filters" tap="{{ clearFilters }}" class="-outline-secondary text-sm" 
+                            visibility="{{ hasActiveFilters ? 'visible' : 'collapsed' }}" />
+                </WrapLayout>
+
+                <ListView row="2" items="{{ filteredItems }}" class="list-group" separatorColor="transparent">
+                    <ListView.itemTemplate>
+                        <GridLayout columns="auto, *, auto" class="p-2 bg-white m-2 rounded-lg shadow">
+                            <Image col="0" src="{{ imageUrl }}" width="64" height="64" class="rounded" />
+                            <StackLayout col="1" class="ml-2">
+                                <Label text="{{ type }}" class="font-semibold" />
+                                <Label text="{{ occasion }}" class="text-gray-500" />
+                                <Label text="{{ lastWorn ? 'Last worn: ' + lastWornFormatted : 'Never worn' }}" 
+                                       class="text-xs text-gray-400" />
+                            </StackLayout>
+                            <Button col="2" text="⋮" class="-outline" tap="{{ $parents['ListView'].onItemMenu }}" />
+                        </GridLayout>
+                    </ListView.itemTemplate>
+                </ListView>
+            </GridLayout>
+        </TabViewItem>
+
+        <TabViewItem title="Outfits">
+            <GridLayout rows="auto, auto, *" class="p-4">
+                <Button row="0" text="Generate New Outfit" tap="{{ showOutfitDialog }}" class="-primary mb-4" />
+                
+                <SegmentedBar row="1" items="{{ occasionFilters }}" selectedIndex="{{ selectedOccasionIndex }}" 
+                             class="mb-4" />
+
+                <ListView row="2" items="{{ filteredOutfits }}" separatorColor="transparent">
+                    <ListView.itemTemplate>
+                        <GridLayout class="p-2 bg-white m-2 rounded-lg shadow">
+                            <StackLayout>
+                                <GridLayout columns="*, auto" class="p-2">
+                                    <Label col="0" text="{{ occasion }}" class="font-bold" />
+                                    <StackLayout col="1" orientation="horizontal">
+                                        <Label text="{{ rating }}" class="mr-1" />
+                                        <Label text="★" class="text-yellow-500" />
+                                    </StackLayout>
+                                </GridLayout>
+                                <GridLayout columns="*, *, *" class="p-2">
+                                    <Image col="0" src="{{ items[0].imageUrl }}" class="w-16 h-16 m-1 rounded" />
+                                    <Image col="1" src="{{ items[1].imageUrl }}" class="w-16 h-16 m-1 rounded" />
+                                    <Image col="2" src="{{ items[2].imageUrl }}" class="w-16 h-16 m-1 rounded" />
+                                </GridLayout>
+                                <Button text="Wear Today" tap="{{ $parents['ListView'].onWearOutfit }}" 
+                                        class="-outline-secondary m-2" />
+                            </StackLayout>
+                        </GridLayout>
+                    </ListView.itemTemplate>
+                </ListView>
+            </GridLayout>
+        </TabViewItem>
+    </TabView>
+</Page>
